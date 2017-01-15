@@ -1,6 +1,6 @@
 <h1>候選人列表</h1>
 
-<%= render partial: 'ad', locals: {text: 123} %>
+<%= render  'ad', text: @text %>
 
 <!-- 
 <a href="<%= new_candidate_path %>">新增</a> 建議用下面link_to方式-->
@@ -8,10 +8,6 @@
 
 
 <ul>
-		<% @candidates.each do |candidate| %>
-		<li><%=link_to candidate.name, candidate_path(candidate) %>
-			<%= link_to'更新', edit_candidate_path(candidate) %>
-			<%= link_to'刪除', candidate_path(candidate), method: :delete, data: {confirm: "確定刪除嗎？" } %>
-			</li>
-		<% end %>
+	<!-- collecition 作迴圈這件事，前面要完整的 render partial -->
+	<%= render partial: "candidate", collection: @candidates %> 
 </ul>

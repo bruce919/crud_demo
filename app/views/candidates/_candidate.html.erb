@@ -1,0 +1,9 @@
+<li>
+		<%= link_to candidate_name(candidate), candidate %> | 
+		<%= link_to candidate.display_gender, candidate %> | 
+		
+		<%= candidate.votes.size %>票 | 
+		<%= link_to'我要投給這個人', vote_candidate_path(candidate), method: :put %> | 
+		<%= link_to'更新', edit_candidate_path(candidate) %> | 
+		<%= link_to'刪除', candidate, method: :delete, data: {confirm: "確定刪除嗎？" } %>
+</li>

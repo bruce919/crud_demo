@@ -1,10 +1,10 @@
 class CandidatesController < ApplicationController
 
-before_action :find_candidate, only: [:show, :edit, :update, :destroy] #每個方法執行前就先執行這個方法
+before_action :find_candidate, only: [:show, :edit, :update, :destroy, :vote] #每個方法執行前就先執行這個方法
 
 	def index
 		@candidates = Candidate.all
-		@text = "我是XXX，我當選之後，一定會。。。。。"
+		@text = "我是XXX，我當選之後，一定會。。。。。。"
 	end
 
 	def new
@@ -65,6 +65,11 @@ before_action :find_candidate, only: [:show, :edit, :update, :destroy] #每個�
 		# find_candidate 有加 before_action 就可以不用寫這行
 	end
 
+	def vote
+		@candidate.votes.create(ip_address: request.remote_ip)
+		redirect_to candidates_path, notice:"投票成功！"
+	end
+
 	private
 	def find_candidate
 		@candidate = Candidate.find_by(id: params[:id])
@@ -74,4 +79,6 @@ before_action :find_candidate, only: [:show, :edit, :update, :destroy] #每個�
 	def candidate_params
 		params.require(:candidate).permit(:name, :gender, :age, :party)
 	end
+
+
 end
