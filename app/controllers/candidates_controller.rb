@@ -67,7 +67,12 @@ before_action :find_candidate, only: [:show, :edit, :update, :destroy, :vote] #�
 
 	def vote
 		@candidate.votes.create(ip_address: request.remote_ip)
+		
+		#寄信
+		VoteMailer.notify(@candidate).deliver_later #deliver_now 是指馬上寄
+
 		redirect_to candidates_path, notice:"投票成功！"
+
 	end
 
 	private

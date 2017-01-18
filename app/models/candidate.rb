@@ -1,6 +1,7 @@
 class Candidate < ApplicationRecord
 	has_many :votes
-  validates :name, :party, presence: true
+  validates :name, presence: true, uniqueness: true
+  validates :party, presence: true
 
   def display_gender
     if gender == "1"
@@ -11,4 +12,5 @@ class Candidate < ApplicationRecord
       name
     end
   end
+  
 end
