@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+
+  namespace :api do
+    resources :candidates
+  end
+  
+  apipie
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   # get "/", to: "welcome#index" #首頁標準寫法
   root "welcome#index" #另一種首頁寫法

@@ -1,8 +1,10 @@
 class CandidatesController < ApplicationController
 
 before_action :find_candidate, only: [:show, :edit, :update, :destroy, :vote] #每個方法執行前就先執行這個方法
+skip_before_filter :verify_authenticity_token
 
 	def index
+		# render json:  Candidate.all
 		@candidates = Candidate.all
 		@text = "我是XXX，我當選之後，一定會。。。。。。"
 	end
@@ -59,6 +61,8 @@ before_action :find_candidate, only: [:show, :edit, :update, :destroy, :vote] #�
 		redirect_to candidates_path, notice: "刪除成功！"
 	end
 
+	# api :GET, '/age/:id'
+	# param :id, :number
 	def show
 			# @candidate = Candidate.find_by(id: params[:id]) 底下加  private 的 find_candidate就不用寫這行
 			# redirect_to candidates_path, notice: "查無此資料" unless @candidate 底下加  private 的 find_candidate就不用寫這行
